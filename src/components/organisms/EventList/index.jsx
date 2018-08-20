@@ -1,14 +1,20 @@
-import React from 'react'
-import EventListItem from '../../molecules/EventItem'
+import React from "react";
+import EventListItem from "../../molecules/EventItem";
 
-const EventList = () => {
-  return(
+const EventList = ({ events, handleSelectEditEvent, handleDeleteEvent }) => {
+  return (
     <div>
-      <EventListItem/>
-      <EventListItem/>
-      <EventListItem/>
+      <h1>Event List</h1>
+      {events.map(event => (
+        <EventListItem
+          event={event}
+          key={event.id}
+          handleDeleteEvent={handleDeleteEvent}
+          handleSelectEditEvent={handleSelectEditEvent}
+        />
+      ))}
     </div>
-  )
-}
+  );
+};
 
-export default EventList
+export default EventList;
