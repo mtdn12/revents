@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Grid, Button } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import Template from "../../templates/Template";
 import EventList from "../../organisms/EventList";
-import EventForm from "../../organisms/EventForm";
 import cuid from "cuid";
 
 const events = [
@@ -113,22 +112,7 @@ class EventDashboard extends Component {
               handleSelectEditEvent={this.handleSelectEditEvent}
               handleDeleteEvent={this.handleDeleteEvent}
             />
-          </Grid.Column>
-          <Grid.Column width={6}>
-            <Button
-              onClick={this.handleFormOpen}
-              positive
-              content="Create Event"
-            />
-            {this.state.isOpen && (
-              <EventForm
-                handleCreateEvent={this.handleCreateEvent}
-                handleFormClose={this.handleFormClose}
-                selectedEvent={this.state.selectedEvent}
-                handleUpdateEvent={this.handleUpdateEvent}
-              />
-            )}
-          </Grid.Column>
+          </Grid.Column>          
         </Grid>
       </Template>
     );
