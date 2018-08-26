@@ -5,10 +5,10 @@ import {Switch, Route, Redirect} from 'react-router-dom'
 import {Grid} from 'semantic-ui-react'
 import SettingNav from '../../organisms/SettingNav'
 import Template from "../../templates/Template";
-import Basic from '../../pages/Basic'
-import About from '../../pages/About'
-import Photos from '../../pages/Photos'
-import Account from '../../pages/Account'
+import Basic from '../../organisms/Basic'
+import About from '../../organisms/About'
+import Photos from '../../organisms/Photos'
+import Account from '../../organisms/Account'
 
 const SettingDashboard = () => {
   return (
