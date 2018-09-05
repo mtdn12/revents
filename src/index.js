@@ -11,6 +11,7 @@ import './index.css'
 import 'semantic-ui-css/semantic.min.css'
 import App from './components/App'
 import registerServiceWorker from './registerServiceWorker'
+import ScrollToTop from './utils/ScrollToTop'
 
 const initialState = Immutable.Map()
 const history = createHistory()
@@ -22,7 +23,9 @@ const init = async() => {
     ReactDOM.render(
       <Provider store={store}>
         <ConnectedRouter  history={history}>
-          <App />
+          <ScrollToTop>
+            <App />
+          </ScrollToTop>
         </ConnectedRouter >
       </Provider>
     , rootEl)

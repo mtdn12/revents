@@ -21,20 +21,18 @@ import EventDashboard from '../components/pages/EventDashboard'
 
 class EventDashboardContainer extends Component {
   render() {
-    return ( <
-      EventDashboard { ...this.props
-      }
-      />
+    return (
+       <EventDashboard { ...this.props } />
     );
   }
 }
 
 const mapStateToProps = state => ({
-
+  events: state.getIn(['event', 'events'])
 })
 
 const mapDispatchToProps = dispatch => ({
-
+  handleDeleteEvent: eventId => dispatch(requestDeleteEvent(eventId)),
 })
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps)
@@ -47,4 +45,4 @@ const withEventSaga = withSaga({
   saga: eventSaga
 })
 
-export default compose(withConnect, withEventReducer, withEventSaga)(EventDashboardContainer)
+export default compose(withEventReducer, withConnect, withEventSaga)(EventDashboardContainer)

@@ -10,7 +10,7 @@ export const injectSaga = (store, {
   if (store.asyncSagas.includes(key)) return
   store.asyncSagas.push(key)
   store.injectedSagas = [...store.injectedSagas, saga]
-  store.runSaga()
+  store.runSaga(saga)
 }
 
 // export default createRootSaga

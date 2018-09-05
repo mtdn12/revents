@@ -2,8 +2,8 @@ import { takeLatest, call, put, all } from 'redux-saga/effects'
 
 import { CONSTANTS } from './actions'
 
-function* eventWatcher() {
+function* eventFormWatcher() {
  
 }
 
-export default eventWatcher
+export default eventFormWatcher

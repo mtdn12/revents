@@ -40,8 +40,7 @@ const configureStore = (initialState, history) => new Promise((res, rej) => {
       },
       persistCallback: () => res(store),
     }
-    const enhancers = [offline(offlineConfig)]
-    console.log('function',createRootReducer())
+    const enhancers = [offline(offlineConfig)] 
     let composeEnhancers = compose
     if (typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) {
       composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -55,7 +54,7 @@ const configureStore = (initialState, history) => new Promise((res, rej) => {
     store.runSaga = sagaMiddleware.run
     store.injectedReducers = {}
     store.injectedSagas = {}
-    store.asyncSagas = {}
+    store.asyncSagas = []
 
     if (module.hot) {
       module.hot.accept('./reducers', () => {

@@ -1,14 +1,14 @@
 import React from "react";
 import EventListItem from "../../molecules/EventItem";
 
-const EventList = ({ events, handleSelectEditEvent, handleDeleteEvent }) => {
+const EventList = ({ events, handleSelectEditEvent, handleDeleteEvent }) => {  
   return (
     <div>
       <h1>Event List</h1>
       {events.map(event => (
         <EventListItem
           event={event}
-          key={event.id}
+          key={event.get('id')}
           handleDeleteEvent={handleDeleteEvent}
           handleSelectEditEvent={handleSelectEditEvent}
         />
