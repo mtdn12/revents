@@ -15,42 +15,49 @@ import EventForm from '../components/pages/EventForm'
 import {
   setFormItem
 } from '../modules/eventForm/actions'
+import {
+  requestCreateEvent,
+  requestUpdateEvent,
+} from '../modules/event/actions'
 
 class EventFormContainer extends Component {
   componentDidMount() {
     const id = this.props.match.params.id
     if (!id) {
       const formItem = {
+        id:'',
         title: "",
         date: "",
         city: "",
         venue: "",
-        hostedBy: ""
+        hostedBy: "",
+        category: '',
+        description: ''
       };
       this.props.handleSetFormItem(formItem)
-    } else {
-    }
+    } else {}
   }
-  componentDidUpdate(prevProps) {
-    if (prevProps.match.params.id !== this.props.match.params.id) {
+  componentDidUpdate(prevProps) { 
+    if (prevProps.location.key !== this.props.location.key) {      
       const id = this.props.match.params.id
       if (!id) {
         const formItem = {
+          id: '',
           title: "",
           date: "",
           city: "",
           venue: "",
-          hostedBy: ""
+          hostedBy: "",
+          category: '',
+          description: ''
         };
         this.props.handleSetFormItem(formItem)
-      } else {
-      }
+        this.forceUpdate()
+      } else {}
     }
   }
   render() {
-    return ( < EventForm { ...this.props
-      }
-      /> )
+    return ( < EventForm { ...this.props } /> )
     }
   }
 

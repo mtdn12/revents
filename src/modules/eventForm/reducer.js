@@ -8,11 +8,15 @@ import {
 
 const initialState = fromJS({
   formItem: {
+    id: "",
     title: "",
     date: "",
     city: "",
     venue: "",
-    hostedBy: ""
+    hostedBy: "",
+    category: '',
+    description: '',
+    venueLatLng:{}
   }
 })
 

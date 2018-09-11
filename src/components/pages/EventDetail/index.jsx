@@ -7,6 +7,7 @@ import EventDetailSidebar from "../../molecules/EventDetailSidebar";
 import Template from "../../templates/Template";
 
 const EventDetail = ({event, handleSetManageForm}) => {
+  console.log(event.toJS())
   return (
     <Template>
       <Grid>

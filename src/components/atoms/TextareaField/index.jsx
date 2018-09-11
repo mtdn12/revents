@@ -20,7 +20,7 @@ const TextareaField = ({
       rows={rows}
       onBlur={handleBlur}
     />
-    {Boolean(error) && <Label style={{ color: "red" }}>{error}</Label>}
+    {touched && Boolean(error) && <Label style={{ color: "red" }}>{error}</Label>}
   </Form.Field>
 );
 
