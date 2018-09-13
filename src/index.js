@@ -2,12 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import {Provider} from 'react-redux'
+import ReduxToastr from 'react-redux-toastr'
 import {ConnectedRouter } from 'react-router-redux'
 import Immutable from 'immutable'
 import createHistory from 'history/createBrowserHistory'
 import configureStore from './store/configureStore'
 
 import './index.css'
+import 'react-redux-toastr/lib/css/react-redux-toastr.min.css'
 import 'semantic-ui-css/semantic.min.css'
 import App from './components/App'
 import registerServiceWorker from './registerServiceWorker'
@@ -24,6 +26,11 @@ const init = async() => {
       <Provider store={store}>
         <ConnectedRouter  history={history}>
           <ScrollToTop>
+            <ReduxToastr 
+              position="bottom-right"
+              transitionIn="fadeIn"
+              transitionOut='fadeOut'
+            />
             <App />
           </ScrollToTop>
         </ConnectedRouter >

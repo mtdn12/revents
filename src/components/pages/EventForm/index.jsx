@@ -1,11 +1,9 @@
-/*gloabl google*/
 
 import React from "react";
 import { Segment, Form, Button, Header } from "semantic-ui-react";
 import Template from "../../templates/Template";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import Script from "react-load-script";
 import InputField from "../../atoms/InputField";
 import TextareaField from "../../atoms/TextareaField";
 import SelectField from "../../atoms/SelectField";
@@ -23,15 +21,11 @@ const category = [
 
 class EventForm extends React.Component {
   state = {
-    scriptLoaded: false,
     cityLatLng: {},
     venueLatLng: {}
   };
   handleSetCityLatLng = cor => {
     this.setState({ cityLatLng: cor });
-  };
-  handleScriptLoaded = () => {
-    this.setState({ scriptLoaded: true });
   };
   render() {
     const { formItem } = this.props;
@@ -39,15 +33,15 @@ class EventForm extends React.Component {
       <Template>
         <Formik
           initialValues={formItem.toJS()}
-          // validationSchema={Yup.object().shape({
-          //   title: Yup.string().required("Title field is required"),
-          //   category: Yup.string().required("category field is required"),
-          //   description: Yup.string().required("description field is required"),
-          //   date: Yup.string().required("Date field is required"),
-          //   city: Yup.string().required("city field is required"),
-          //   venue: Yup.string().required("venue field is required"),
-          //   hostedBy: Yup.string().required("hostedBy field is required")
-          // })}
+          validationSchema={Yup.object().shape({
+            title: Yup.string().required("Title field is required"),
+            category: Yup.string().required("category field is required"),
+            description: Yup.string().required("description field is required"),
+            date: Yup.string().required("Date field is required"),
+            city: Yup.string().required("city field is required"),
+            venue: Yup.string().required("venue field is required"),
+            hostedBy: Yup.string().required("hostedBy field is required")
+          })}
           onSubmit={values => console.log(values)}
           enableReinitialize
           render={({
@@ -61,10 +55,6 @@ class EventForm extends React.Component {
             setFieldTouched
           }) => (
             <Segment>
-              <Script
-                url="https://maps.googleapis.com/maps/api/js?key=AIzaSyDh5SM4-gSFxUOytzN0YhcKmWvo70Fdcww&libraries=places"
-                onLoad={this.handleScriptLoaded}
-              />
               <Form onSubmit={handleSubmit}>
                 <Header sub color="teal" content="Event Details" />
                 <InputField

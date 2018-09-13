@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from '../../organisms/NavBar'
+import NavBar from '../../../container/Navbar'
 import { Container } from 'semantic-ui-react'
 
 const Template = ({children,...props}) => {
