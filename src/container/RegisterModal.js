@@ -9,6 +9,7 @@ import {
 } from 'redux'
 import RegisterModal from '../components/organisms/RegisterModal'
 import {clearModal} from '../modules/modals/actions'
+import {requestRegister, requestSocialLogin} from '../modules/auth/actions'
 
 class RegisterModalContainer extends Component {  
   render() {    
@@ -19,11 +20,14 @@ class RegisterModalContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  formItem: state.getIn(['auth','loginItem'])
+  formItem: state.auth.registerItem
 })
 
 const mapDispatchToProps = dispatch => ({
-  handleCloseModal: () => dispatch(clearModal())
+  handleCloseModal: () => dispatch(clearModal()),
+  handleRegister: values => dispatch(requestRegister(values)),
+  handleSocialLogin: provider => dispatch(requestSocialLogin(provider))
+
 })
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps)

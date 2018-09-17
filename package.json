@@ -37,6 +37,7 @@
     "redux-immutable": "^4.0.0",
     "redux-immutable-state-invariant": "^2.1.0",
     "redux-offline-immutable-config": "^1.0.0",
+    "redux-persist": "^5.10.0",
     "redux-saga": "^0.16.0",
     "revalidate": "^1.2.0",
     "semantic-ui-css": "^2.3.3",

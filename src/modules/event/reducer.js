@@ -1,9 +1,8 @@
 import createReducer from '../../utils/createReducer'
 import {ActionHandler} from './actions'
-import {fromJS} from 'immutable'
 
 
-const initialState = fromJS({
+const initialState = {
   events:   [
     {
       id: '1',
@@ -60,6 +59,6 @@ const initialState = fromJS({
       ]
     }
   ]
-})
+}
 
 export default createReducer(initialState, ActionHandler)

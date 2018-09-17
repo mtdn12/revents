@@ -6,8 +6,7 @@ import EventDetailInfo from "../../molecules/EventDetailInfo";
 import EventDetailSidebar from "../../molecules/EventDetailSidebar";
 import Template from "../../templates/Template";
 
-const EventDetail = ({event, handleSetManageForm}) => {
-  console.log(event.toJS())
+const EventDetail = ({event, handleSetManageForm}) => { 
   return (
     <Template>
       <Grid>
@@ -17,7 +16,7 @@ const EventDetail = ({event, handleSetManageForm}) => {
           <EventDetailChat />
         </Grid.Column>
         <Grid.Column width={6}>
-          <EventDetailSidebar attendees={event.get('attendees')} />
+          <EventDetailSidebar attendees={event.attendees} />
         </Grid.Column>
       </Grid>
     </Template>

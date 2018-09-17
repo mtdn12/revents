@@ -36,25 +36,7 @@ class EventFormContainer extends Component {
       };
       this.props.handleSetFormItem(formItem)
     } else {}
-  }
-  componentDidUpdate(prevProps) { 
-    if (prevProps.location.key !== this.props.location.key) {      
-      const id = this.props.match.params.id
-      if (!id) {
-        const formItem = {
-          id: '',
-          title: "",
-          date: "",
-          city: "",
-          venue: "",
-          hostedBy: "",
-          category: '',
-          description: ''
-        };
-        this.props.handleSetFormItem(formItem)
-        this.forceUpdate()
-      } else {}
-    }
+    console.log(this.props)
   }
   render() {
     return ( < EventForm { ...this.props } /> )
@@ -62,7 +44,7 @@ class EventFormContainer extends Component {
   }
 
   const mapStateToProps = (state, ownsProps) => ({
-    formItem: state.getIn(['eventForm', 'formItem'])
+    formItem: state.eventForm.formItem
   })
 
   const mapDispatchToProps = dispatch => ({

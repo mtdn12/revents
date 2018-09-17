@@ -5,10 +5,10 @@ const EventList = ({ events, handleSelectEditEvent, handleDeleteEvent }) => {
   return (
     <div>
       <h1>Event List</h1>
-      {events.map(event => (
+      {events && events.map(event => (
         <EventListItem
           event={event}
-          key={event.get('id')}
+          key={event.id}
           handleDeleteEvent={handleDeleteEvent}
           handleSelectEditEvent={handleSelectEditEvent}
         />

@@ -13,8 +13,7 @@ class EventDetailInfo extends React.Component {
     }));
   };
   render() {
-    const { event } = this.props;
-    console.log(event.toJS());
+    const { event } = this.props;    
     return (
       <Segment.Group>
         <Segment attached="top">
@@ -23,7 +22,7 @@ class EventDetailInfo extends React.Component {
               <Icon size="large" color="teal" name="info" />
             </Grid.Column>
             <Grid.Column width={15}>
-              <p>{event.get("description")}</p>
+              <p>{event.description}</p>
             </Grid.Column>
           </Grid>
         </Segment>
@@ -33,7 +32,7 @@ class EventDetailInfo extends React.Component {
               <Icon name="calendar" size="large" color="teal" />
             </Grid.Column>
             <Grid.Column width={15}>
-              <span>{format(event.get("date"), "dddd Do MMMM")}</span>
+              <span>{format(event.date.toDate(), "dddd Do MMMM")}</span>
             </Grid.Column>
           </Grid>
         </Segment>
@@ -43,7 +42,7 @@ class EventDetailInfo extends React.Component {
               <Icon name="marker" size="large" color="teal" />
             </Grid.Column>
             <Grid.Column width={11}>
-              <span>{event.get("venue")}</span>
+              <span>{event.venue}</span>
             </Grid.Column>
             <Grid.Column width={4}>
               <Button
@@ -57,8 +56,8 @@ class EventDetailInfo extends React.Component {
         </Segment>
         {this.state.isShowMap && (
           <EventDetailMap
-            lat={event.getIn(["venueLatLng", "lat"])}
-            lng={event.getIn(["venueLatLng", "lng"])}
+            lat={event.venueLatLng.lat}
+            lng={event.venueLatLng.lng}
           />
         )}
       </Segment.Group>

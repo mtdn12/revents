@@ -1,21 +1,22 @@
 import React from "react";
-import { Segment, Form, Button, Header } from "semantic-ui-react";
+import { Segment, Form, Button, Divider } from "semantic-ui-react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import InputField from "../../atoms/InputField";
+import SocialLogin from '../SocialLogin'
 
 class RegisterForm extends React.Component {
   render() {
-    const { formItem, handleClose } = this.props;
+    const { formItem, handleRegister } = this.props;
     return (
       <Formik
-        initialValues={formItem.toJS()}
+        initialValues={formItem}
         validationSchema={Yup.object().shape({
           name: Yup.string().required("Name field is required"),
           email: Yup.string().required("Email field is required"),
           password: Yup.string().required("Password field is required")
         })}
-        onSubmit={values => console.log(values)}
+        onSubmit={values => handleRegister(values)}
         enableReinitialize
         render={({
           values,
@@ -57,10 +58,13 @@ class RegisterForm extends React.Component {
                 handleBlur={handleBlur}
                 type="password"
               />
-              <Button positive type="submit">
+              <Button positive type="submit" fluid>
                 Register
               </Button>
-              <Button type="button" onClick={handleClose}>Cancel</Button>
+              <Divider horizontal>
+                Or
+              </Divider>
+              <SocialLogin/>
             </Form>
           </Segment>
         )}

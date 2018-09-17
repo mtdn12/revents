@@ -60,7 +60,5 @@ export const CONSTANTS = {
 
 
  export const ActionHandler = {
-  [CREATE_EVENT_REQUEST]: (state, action) => pipe([mutators.addEvent(action)], state),
-  [UPDATE_EVENT_REQUEST]: (state, action) => pipe([mutators.updateEvent(action)], state),
-  [DELETE_EVENT_REQUEST]: (state, action) => pipe([mutators.deleteEvent(action)], state)
+  
  }

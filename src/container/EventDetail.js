@@ -4,6 +4,7 @@ import React, {
 import {
   connect
 } from 'react-redux'
+import {firestoreConnect} from 'react-redux-firebase'
 import {
   compose
 } from 'redux'
@@ -28,7 +29,7 @@ class EventDetailContainer extends Component {
 }
 
 const mapStateToProps = (state, ownsProps) => ({
-  event: state.getIn(['eventDetail','event'])
+  event: state.eventDetail.event
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -46,4 +47,10 @@ const withEventDetailSaga = withSaga({
   saga: eventDetailSaga
 })
 
-export default compose(withEventDetailReducer, withEventDetailSaga, withConnect)(EventDetailContainer)
+export default compose(
+  withEventDetailReducer,
+  withEventDetailSaga,
+  withConnect,
+  firestoreConnect([{
+    collection: 'events'
+  }]))(EventDetailContainer)

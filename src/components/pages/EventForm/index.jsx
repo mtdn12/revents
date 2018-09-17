@@ -32,7 +32,7 @@ class EventForm extends React.Component {
     return (
       <Template>
         <Formik
-          initialValues={formItem.toJS()}
+          initialValues={formItem}
           validationSchema={Yup.object().shape({
             title: Yup.string().required("Title field is required"),
             category: Yup.string().required("category field is required"),

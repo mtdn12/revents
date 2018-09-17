@@ -4,16 +4,16 @@ import EventListAttendee from "../EventListAttendee";
 import { Link } from "react-router-dom";
 import format from "date-fns/format";
 
-const EventListItem = ({ event, handleSelectEditEvent, handleDeleteEvent }) => {
+const EventListItem = ({ event, handleSelectEditEvent, handleDeleteEvent }) => {  
   return (
     <Segment.Group>
       <Segment>
         <Item.Group>
           <Item>
-            <Item.Image size="tiny" circular src={event.get("hostPhotoURL")} />
+            <Item.Image size="tiny" circular src={event.hostPhotoURL} />
             <Item.Content>
-              <Item.Header as="a">{event.get("title")}</Item.Header>
-              <Item.Description>{event.get("hostedBy")}</Item.Description>
+              <Item.Header as="a">{event.title}</Item.Header>
+              <Item.Description>{event.hostedBy}</Item.Description>
             </Item.Content>
           </Item>
         </Item.Group>
@@ -21,22 +21,16 @@ const EventListItem = ({ event, handleSelectEditEvent, handleDeleteEvent }) => {
       <Segment>
         <span>
           <Icon name="clock" />
-          {format(event.get("date"), "dddd Do MMMM")} at{" "}
-          {format(event.get("date"), "HH:mm")} |<Icon name="marker" />{" "}
-          {event.venue}
+          {format(event.date.toDate(), "dddd Do MMMM")} at {format(event.date.toDate(), "HH:mm")}{" "}
+          |<Icon name="marker" /> {event.venue}
         </span>
       </Segment>
       <Segment secondary>
         <List horizontal>
-          {event.get("attendees") &&
-            event
-              .get("attendees")
-              .map(attendee => (
-                <EventListAttendee
-                  key={attendee.get("id")}
-                  attendee={attendee}
-                />
-              ))}
+          {event.attendees &&
+            Object.keys(event.attendees).map(key => (
+              <EventListAttendee key={key} attendee={event.attendees[key]} />
+            ))}
         </List>
       </Segment>
       <Segment clearing>
@@ -50,7 +44,7 @@ const EventListItem = ({ event, handleSelectEditEvent, handleDeleteEvent }) => {
         />
         <Button
           as={Link}
-          to={`/event/${event.get("id")}`}
+          to={`/event/${event.id}`}
           color="teal"
           floated="right"
           content="View"

@@ -11,6 +11,7 @@ import withReducer from '../utils/withReducer'
 import withSaga from '../utils/withSaga'
 import eventReducer from '../modules/event/reducer'
 import eventSaga from '../modules/event/sagas'
+import {firestoreConnect} from 'react-redux-firebase'
 import {
   requestCreateEvent,
   requestUpdateEvent,
@@ -28,7 +29,8 @@ class EventDashboardContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  events: state.getIn(['event', 'events'])
+  // events: state.event.events
+  events: state.firestore.ordered.events || []
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -45,4 +47,11 @@ const withEventSaga = withSaga({
   saga: eventSaga
 })
 
-export default compose(withEventReducer, withConnect, withEventSaga)(EventDashboardContainer)
+export default compose(
+      firestoreConnect([{
+        collection: 'events'
+    }]),
+    withEventReducer,
+    withConnect,
+    withEventSaga,   
+    )(EventDashboardContainer)

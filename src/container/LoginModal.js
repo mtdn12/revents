@@ -9,6 +9,7 @@ import {
 } from 'redux'
 import LoginModal from '../components/organisms/LoginModal'
 import {clearModal} from '../modules/modals/actions'
+import {requestLogin, requestSocialLogin} from '../modules/auth/actions'
 
 class LoginModalContainer extends Component {  
   render() {    
@@ -19,11 +20,13 @@ class LoginModalContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  formItem: state.getIn(['auth','loginItem'])
+  formItem: state.auth.loginItem
 })
 
 const mapDispatchToProps = dispatch => ({
-  handleCloseModal: () => dispatch(clearModal())
+  handleCloseModal: () => dispatch(clearModal()),
+  handleLogin: values => dispatch(requestLogin(values)),
+  handleSocialLogin: provider => dispatch(requestSocialLogin(provider))
 })
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps)

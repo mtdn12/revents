@@ -4,13 +4,17 @@ import RegisterForm from "../RegisterForm";
 
 class RegisterModal extends Component {
   render() {
-    const { formItem, handleCloseModal } = this.props;
+    const { formItem, handleCloseModal, handleRegister } = this.props;
     return (
       <Modal size="mini" open={true} onClose={handleCloseModal}>
         <Modal.Header>Sign Up to Re-vents!</Modal.Header>
         <Modal.Content>
           <Modal.Description>
-            <RegisterForm formItem={formItem} handleClose={handleCloseModal} />
+            <RegisterForm
+              formItem={formItem}
+              handleClose={handleCloseModal}
+              handleRegister={handleRegister}
+            />
           </Modal.Description>
         </Modal.Content>
       </Modal>

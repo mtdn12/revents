@@ -8,7 +8,7 @@ const EventListAttendee = ({attendee}) => {
         as="a"
         size="mini"
         circular
-        src={attendee.get('photoURL')}
+        src={attendee && attendee.photoURL}
       />      
     </List.Item>
   );

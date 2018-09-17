@@ -23,7 +23,7 @@ class ModalManagerContainer extends Component {
   render() {
     const { currentModal } = this.props
     if(currentModal) {
-      const {modalType, modalProps} = currentModal.toJS()
+      const {modalType, modalProps} = currentModal
       const ModalComponent = modalLookup[modalType]
       return (
         <ModalComponent {...modalProps} />
@@ -36,7 +36,7 @@ class ModalManagerContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  currentModal: state.getIn(['modals','currentModal'])
+  currentModal: state.modals.currentModal
 })
 
 const mapDispatchToProps = dispatch => ({

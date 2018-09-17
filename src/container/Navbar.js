@@ -10,18 +10,28 @@ import {
 import withReducer from '../utils/withReducer'
 import withSaga from '../utils/withSaga'
 import { setModal } from '../modules/modals/actions'
+import { withFirebase } from 'react-redux-firebase'
+import { withRouter } from 'react-router-dom'
+import { firestoreConnect } from 'react-redux-firebase'
 
 import NavBar from '../components/organisms/NavBar'
 
 class NavBarContainer extends Component {
+  handleSignOut =() => {
+    this.props.firebase.logout()
+    this.props.history.push('/')
+  }
   render() {
     return (
-       <NavBar { ...this.props } />
+       <NavBar  
+          handleSignOut = {this.handleSignOut}
+          { ...this.props } />
     );
   }
 }
 const mapStateToProps = state => ({
-  authenticated: state.getIn('auth','isAuthenticated')
+  auth: state.firebase.auth,
+  profile: state.firebase.profile,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -31,4 +41,4 @@ const mapDispatchToProps = dispatch => ({
 const withConnect = connect(mapStateToProps, mapDispatchToProps)
 
 
-export default compose(withConnect)(NavBarContainer)
+export default compose(withConnect, withFirebase, withRouter)(NavBarContainer)

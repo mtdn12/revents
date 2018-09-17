@@ -1,11 +1,13 @@
-import { ActionHandler } from './actions'
 import createReducer from '../../utils/createReducer'
+import {
+  ActionHandler
+} from './actions'
 
 const initialState = {
-  location: {
-    location: {},
-    action:''
-  },
+  resetPasswordItem: {
+    newPassword: '',
+    confirmPassword: ''
+  }
 }
 
 export default createReducer(initialState, ActionHandler)

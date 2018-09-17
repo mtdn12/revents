@@ -1,8 +1,7 @@
 import createReducer from '../../utils/createReducer'
 import {ActionHandler} from './actions'
-import {fromJS} from 'immutable'
 
-const initialState = fromJS({
+const initialState = {
   auth: {},
   loginItem: {
     password: '',
@@ -14,6 +13,6 @@ const initialState = fromJS({
     password: ''
   },
   isAuthenticated: false
-})
+}
 
 export default createReducer(initialState, ActionHandler)

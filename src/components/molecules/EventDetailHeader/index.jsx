@@ -21,7 +21,7 @@ const EventDetailHeader = ({ event, handleSetManageForm }) => {
     <Segment.Group>
       <Segment basic attached="top" style={{ padding: "0" }}>
         <Image
-          src={`/assets/categoryImages/${event.get("category")}.jpg`}
+          src={`/assets/categoryImages/${event.category}.jpg`}
           fluid
           style={eventImageStyle}
         />
@@ -31,12 +31,12 @@ const EventDetailHeader = ({ event, handleSetManageForm }) => {
               <Item.Content>
                 <Header
                   size="huge"
-                  content={event.get("title")}
+                  content={event.title}
                   style={{ color: "white" }}
                 />
-                <p>{format(event.get("date"), "dddd Do MMMM")}</p>
+                <p>{format(event.date.toDate(), "dddd Do MMMM")}</p>
                 <p>
-                  Hosted by <strong>{event.get("hostedBy")}</strong>
+                  Hosted by <strong>{event.hostedBy}</strong>
                 </p>
               </Item.Content>
             </Item>
@@ -49,7 +49,7 @@ const EventDetailHeader = ({ event, handleSetManageForm }) => {
         <Button
           color="orange"
           floated="right"
-          onClick={() => handleSetManageForm(event.toJS())}
+          onClick={() => handleSetManageForm(event)}
         >
           Manage Event
         </Button>

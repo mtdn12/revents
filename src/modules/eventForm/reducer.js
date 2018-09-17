@@ -2,11 +2,8 @@ import createReducer from '../../utils/createReducer'
 import {
   ActionHandler
 } from './actions'
-import {
-  fromJS
-} from 'immutable'
 
-const initialState = fromJS({
+const initialState = {
   formItem: {
     id: "",
     title: "",
@@ -18,6 +15,6 @@ const initialState = fromJS({
     description: '',
     venueLatLng:{}
   }
-})
+}
 
 export default createReducer(initialState, ActionHandler)
