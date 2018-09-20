@@ -89,7 +89,7 @@ function* resetPasswordWorker(firebase, firestore,{payload}){
   }
 }
 
-function* eventWatcher(getFirebase, getFirestore) {
+function* authWatcher(getFirebase, getFirestore) {
   const firebase = getFirebase()
   const firestore = getFirestore()
   yield all([
@@ -100,4 +100,4 @@ function* eventWatcher(getFirebase, getFirestore) {
   ])
 }
 
-export default eventWatcher
+export default authWatcher

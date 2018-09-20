@@ -12,11 +12,13 @@ const DateInput = ({
   touched,
   error,
   handleBlur,
-  placeholder,  
+  placeholder,
+  optional
 }) => {
   return (
     <Form.Field error={touched && Boolean(error)}>
       <DatePicker
+        {...optional}
         name={name}
         placeholderText={placeholder}
         selected={value ? moment(value) : null}
@@ -24,7 +26,8 @@ const DateInput = ({
         onBlur={() => handleBlur(name, true, true)}
         dateFormat = 'YYYY-MM-DD  HH:mm'
         showTimeSelect
-        timeFormat ='HH:mm' 
+        timeFormat ='HH:mm'
+        
       />
       {touched &&
         Boolean(error) && <Label style={{ color: "red" }}>{error}</Label>}

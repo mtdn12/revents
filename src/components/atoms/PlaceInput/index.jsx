@@ -9,10 +9,10 @@ import PlacesAutocomplete, {
 class PlaceInput extends Component {
   state = {
     scriptLoaded: false,
-    address: this.props.value,   
+    address: this.props.value
   };
   handleScriptLoaded = () => {
-    this.setState({ scriptLoaded: true });    
+    this.setState({ scriptLoaded: true });
   };
   handleChange = address => {
     this.setState({ address });
@@ -21,10 +21,10 @@ class PlaceInput extends Component {
   handleSelect = address => {
     this.setState({ address });
     this.props.handleChange(this.props.input.name, address);
-    if(this.props.input.name === 'venue'){
+    if (this.props.input.name === "venue") {
       geocodeByAddress(address)
         .then(results => getLatLng(results[0]))
-        .then(result => this.props.handleChange('venueLatLng', result))
+        .then(result => this.props.handleChange("venueLatLng", result));
     }
     if (this.props.handleSetCityLatLng) {
       geocodeByAddress(address)
@@ -38,9 +38,10 @@ class PlaceInput extends Component {
       input,
       touched,
       error,
-      value,      
+      value,
       searchLocation,
-    } = this.props;    
+      searchOptions
+    } = this.props;
     return (
       <Form.Field error={touched && Boolean(error)}>
         <Script
@@ -53,11 +54,15 @@ class PlaceInput extends Component {
             onSelect={this.handleSelect}
             onChange={this.handleChange}
             debounce={1000}
-            searchOptions={searchLocation && {
-              location: new window.google.maps.LatLng(searchLocation),
-              radius: 1000,
-              types: ['establishment']
-            }}
+            searchOptions={
+              searchOptions
+                ? searchOptions
+                : searchLocation && {
+                    location: new window.google.maps.LatLng(searchLocation),
+                    radius: 1000,
+                    types: ["establishment"]
+                  }
+            }
           >
             {({
               getInputProps,

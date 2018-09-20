@@ -7,10 +7,9 @@ const SelectField = ({
   value,
   handleChange,
   name,
-  placeholder,
-  handleBlur,
+  placeholder, 
   options,
-  multiple
+  multiple,
 }) => (
   <Form.Field error={touched && Boolean(error)}> 
     <Select
@@ -19,7 +18,6 @@ const SelectField = ({
       placeholder={placeholder}
       options={options}
       multiple={multiple}
-      // onBlur={handleBlur}
       name={name}
     />
     {touched && Boolean(error) && <Label style={{ color: "red" }}>{error}</Label>}

@@ -28,7 +28,7 @@ class NavBar extends React.Component {
             />
           </Menu.Item>
           {authenticated ? (
-            <SignedInMenu handleSignOut={handleSignOut} profile={profile} />
+            <SignedInMenu handleSignOut={handleSignOut} profile={profile} auth={auth} />
           ) : (
             <SignedOutMenu handleOpenModal={handleOpenModal} />
           )}

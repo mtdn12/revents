@@ -3,6 +3,7 @@ import {
 } from 'redux'
 import auth from '../modules/auth/reducer'
 import router from '../modules/router/reducer'
+import loading from '../modules/loading/reducer'
 import {
   firebaseReducer
 } from 'react-redux-firebase'
@@ -23,6 +24,7 @@ const createRootReducer = reducers => combineReducers({
     key: 'auth',
     storage
   }, auth),
+  loading,
   firebase: firebaseReducer,
   firestore: firestoreReducer,
   router,
@@ -40,7 +42,11 @@ export const injectReducer = (store, {
     key,
     storage,
   }
-  store.injectedReducers[key] = persistReducer(PersistConfig, reducer)
+  if (key === 'setting') {
+    store.injectedReducers[key] = reducer
+  } else {
+    store.injectedReducers[key] = persistReducer(PersistConfig, reducer)
+  }
   store.replaceReducer(createRootReducer(store.injectedReducers))
 }
 

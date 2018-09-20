@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Menu, Image, Dropdown } from "semantic-ui-react";
 
-const SignedInMenu = ({ profile, handleSignOut }) => {
+const SignedInMenu = ({ profile, handleSignOut, auth }) => {
   return (
     <Menu.Item position="right">
       <Image
@@ -16,7 +16,12 @@ const SignedInMenu = ({ profile, handleSignOut }) => {
           <Dropdown.Item text="Create Event" icon="plus" />
           <Dropdown.Item text="My Events" icon="calendar" />
           <Dropdown.Item text="My Network" icon="users" />
-          <Dropdown.Item text="My Profile" icon="user" />
+          <Dropdown.Item
+            text="My Profile"
+            icon="user"
+            as={Link}
+            to={`/profile/${auth.uid}`}
+          />
           <Dropdown.Item
             text="Settings"
             icon="settings"

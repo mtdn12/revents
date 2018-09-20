@@ -35,7 +35,7 @@ const persistConfig = {
   key: 'root',
   storage,
   stateReconciler: hardSet,
-  blacklist: ['router', ]
+  blacklist: ['router','setting']
 }
 
 const rrfConfig = {

@@ -4,10 +4,9 @@ import {
 } from './actions'
 
 const initialState = {
-  resetPasswordItem: {
-    newPassword: '',
-    confirmPassword: ''
-  },
+  loadings: {
+    uploadImage: false,
+  }
 }
 
 export default createReducer(initialState, ActionHandler)

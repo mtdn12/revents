@@ -14,7 +14,14 @@ const SettingDashboard = ({
   handleResetPassword,
   resetPasswordItem,
   handleSetPasswordItem,
-  providerId
+  providerId,
+  profile,
+  handleUpdateProfile,
+  handleUploadImage,
+  photos,
+  handleDeleteImage,
+  handleSetProfileImage,
+  isUploadImage,
 }) => {
   return (
     <Template>
@@ -22,9 +29,37 @@ const SettingDashboard = ({
         <Grid.Column width={12}>
           <Switch>
             <Redirect exact from="/settings" to="/settings/basic" />
-            <Route path="/settings/basic" component={Basic} />
-            <Route path="/settings/about" component={About} />
-            <Route path="/settings/photos" component={Photos} />
+            <Route
+              path="/settings/basic"
+              render={() => (
+                <Basic
+                  profile={profile}
+                  handleUpdateProfile={handleUpdateProfile}
+                />
+              )}
+            />
+            <Route
+              path="/settings/about"
+              render={() => (
+                <About
+                  profile={profile}
+                  handleUpdateProfile={handleUpdateProfile}
+                />
+              )}
+            />
+            <Route
+              path="/settings/photos"
+              render={() => (
+                <Photos
+                  handleUploadImage={handleUploadImage}
+                  photos={photos}
+                  profile={profile}
+                  handleDeleteImage={handleDeleteImage}
+                  handleSetProfileImage={handleSetProfileImage}
+                  isUploadImage={isUploadImage}
+                />
+              )}
+            />
             <Route
               path="/settings/account"
               render={() => (
