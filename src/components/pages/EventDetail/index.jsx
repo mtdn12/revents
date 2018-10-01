@@ -6,19 +6,23 @@ import EventDetailInfo from "../../molecules/EventDetailInfo";
 import EventDetailSidebar from "../../molecules/EventDetailSidebar";
 import Template from "../../templates/Template";
 
-const EventDetail = ({event, handleSetManageForm}) => { 
+const EventDetail = ({ event }) => {
   return (
     <Template>
-      <Grid>
-        <Grid.Column width={10}>
-          <EventDetailHeader event={event} handleSetManageForm={handleSetManageForm} />
-          <EventDetailInfo event={event} />
-          <EventDetailChat />
-        </Grid.Column>
-        <Grid.Column width={6}>
-          <EventDetailSidebar attendees={event.attendees} />
-        </Grid.Column>
-      </Grid>
+      {event.id && (
+        <Grid>
+          <Grid.Column width={10}>
+            <EventDetailHeader
+              event={event}              
+            />
+            <EventDetailInfo event={event} />
+            <EventDetailChat />
+          </Grid.Column>
+          <Grid.Column width={6}>
+            <EventDetailSidebar attendees={event.attendees} />
+          </Grid.Column>
+        </Grid>
+      )}
     </Template>
   );
 };

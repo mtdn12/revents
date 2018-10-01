@@ -13,17 +13,10 @@ import {
 import {
   reducer as toastrReducer
 } from 'react-redux-toastr'
-import {
-  persistReducer
-} from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
 
 const createRootReducer = reducers => combineReducers({
   ...reducers,
-  auth: persistReducer({
-    key: 'auth',
-    storage
-  }, auth),
+  auth,
   loading,
   firebase: firebaseReducer,
   firestore: firestoreReducer,
@@ -38,15 +31,8 @@ export const injectReducer = (store, {
   if (store.injectedReducers[key]) {
     return
   }
-  let PersistConfig = {
-    key,
-    storage,
-  }
-  if (key === 'setting') {
-    store.injectedReducers[key] = reducer
-  } else {
-    store.injectedReducers[key] = persistReducer(PersistConfig, reducer)
-  }
+  store.injectedReducers[key] = reducer
+
   store.replaceReducer(createRootReducer(store.injectedReducers))
 }
 

@@ -6,7 +6,6 @@ import ReduxToastr from 'react-redux-toastr'
 import {ConnectedRouter } from 'connected-react-router'
 import createHistory from 'history/createBrowserHistory'
 import configureStore from './store/configureStore'
-import { PersistGate } from 'redux-persist/integration/react'
 import './index.css'
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css'
 import 'semantic-ui-css/semantic.min.css'
@@ -19,11 +18,10 @@ const history = createHistory()
 const rootEl = document.getElementById('root')
 
 const init = () => {  
-  const {store, persistor} = configureStore(initialState, history)  
+  const store = configureStore(initialState, history)  
   const render = () => {
     ReactDOM.render(
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
+      <Provider store={store}>       
           <ConnectedRouter history={history}>
             <ScrollToTop>
               <ReduxToastr 
@@ -33,8 +31,7 @@ const init = () => {
               />
               <App />
             </ScrollToTop>          
-          </ConnectedRouter >
-        </PersistGate>
+          </ConnectedRouter >        
       </Provider>
     , rootEl)
   }

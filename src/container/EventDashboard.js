@@ -11,16 +11,15 @@ import withReducer from '../utils/withReducer'
 import withSaga from '../utils/withSaga'
 import eventReducer from '../modules/event/reducer'
 import eventSaga from '../modules/event/sagas'
-import {firestoreConnect} from 'react-redux-firebase'
-import {
-  requestCreateEvent,
-  requestUpdateEvent,
-  requestDeleteEvent
-} from '../modules/event/actions'
+import {firestoreConnect, withFirestore} from 'react-redux-firebase'
 import EventDashboard from '../components/pages/EventDashboard'
 
 
 class EventDashboardContainer extends Component {
+  async componentDidMount(){
+    const {firestore} = this.props
+    await firestore.get('events')
+  }
   render() {
     return (
        <EventDashboard { ...this.props } />
@@ -34,7 +33,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  handleDeleteEvent: eventId => dispatch(requestDeleteEvent(eventId)),
+ 
 })
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps)
@@ -48,9 +47,10 @@ const withEventSaga = withSaga({
 })
 
 export default compose(
-      firestoreConnect([{
-        collection: 'events'
-    }]),
+    //   firestoreConnect([{
+    //     collection: 'events'
+    // }]),
+    withFirestore,
     withEventReducer,
     withConnect,
     withEventSaga,   

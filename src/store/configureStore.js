@@ -4,7 +4,8 @@ import {
   applyMiddleware
 } from "redux";
 import {
-  routerMiddleware
+  routerMiddleware,
+  connectRouter,
 } from 'connected-react-router'
 // import {
 //   routerMiddleware,
@@ -13,15 +14,13 @@ import {
 import createSagaMiddleware from "redux-saga";
 import createRootReducer from './reducers'
 import authSaga from '../modules/auth/sagas'
-import { getFirebase } from 'react-redux-firebase'
-import { getFirestore } from 'redux-firestore'
-
 import {
-  persistStore,
-  persistReducer
-} from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
-import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
+  getFirebase
+} from 'react-redux-firebase'
+import {
+  getFirestore
+} from 'redux-firestore'
+
 
 import {
   reactReduxFirebase
@@ -30,13 +29,6 @@ import {
   reduxFirestore
 } from 'redux-firestore'
 import firebase from '../config/firebaseConfig'
-
-const persistConfig = {
-  key: 'root',
-  storage,
-  stateReconciler: hardSet,
-  blacklist: ['router','setting']
-}
 
 const rrfConfig = {
   userProfile: 'users',
@@ -56,34 +48,31 @@ const configureStore = (initialState, history) => {
     }
 
     store = createStore(
-      persistReducer(persistConfig, createRootReducer()),
+      connectRouter(history)(createRootReducer()),
       initialState,
       composeEnhancers(
         applyMiddleware(...middlewares),
         reactReduxFirebase(firebase, rrfConfig),
         reduxFirestore(firebase))
     )
-    let persistor = persistStore(store)
+
 
     store.runSaga = sagaMiddleware.run
     store.injectedReducers = {}
     store.injectedSagas = {}
     store.asyncSagas = []
     // Golbal sagas
-    
+
     store.asyncSagas.push('auth')
-    store.runSaga(authSaga, getFirebase, getFirestore )
+    store.runSaga(authSaga, getFirebase, getFirestore)
 
     if (module.hot) {
       module.hot.accept('./reducers', () => {
-        store.replaceReducer(persistReducer(persistConfig, createRootReducer(store.injectedReducers)))
+        store.replaceReducer(createRootReducer(store.injectedReducers))
       })
     }
 
-    return {
-      store,
-      persistor
-    }
+    return store
 
   } catch (error) {
     console.log(error.message)

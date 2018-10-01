@@ -9,7 +9,6 @@ export default ({ key, saga }) => WrappedComponent => {
     static contextTypes = {
       store: PropTypes.object.isRequired,
     }
-
     static displayName = `withSaga(${WrappedComponent.displayName ||
       WrappedComponent.name ||
       'Component'})`

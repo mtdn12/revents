@@ -1,7 +1,7 @@
 import React from "react";
 import { Segment, Image, Item, Header, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import format from "date-fns/format";
+import moment from "moment";
 
 const eventImageStyle = {
   filter: "brightness(30%)"
@@ -16,8 +16,7 @@ const eventImageTextStyle = {
   color: "white"
 };
 
-const EventDetailHeader = ({ event, handleSetManageForm }) => {
-  console.log(event)
+const EventDetailHeader = ({ event }) => {
   return (
     <Segment.Group>
       <Segment basic attached="top" style={{ padding: "0" }}>
@@ -35,7 +34,10 @@ const EventDetailHeader = ({ event, handleSetManageForm }) => {
                   content={event.title}
                   style={{ color: "white" }}
                 />
-                <p>{format(event.date.toDate(), "dddd Do MMMM")}</p>
+                <p>
+                  {event.date &&
+                    moment.unix(event.date.seconds).format("dddd Do MMMM")}
+                </p>
                 <p>
                   Hosted by <strong>{event.hostedBy}</strong>
                 </p>
@@ -49,8 +51,9 @@ const EventDetailHeader = ({ event, handleSetManageForm }) => {
         <Button color="teal">JOIN THIS EVENT</Button>
         <Button
           color="orange"
+          as={Link}
+          to={`/manage/${event.id}`}
           floated="right"
-          onClick={() => handleSetManageForm(event)}
         >
           Manage Event
         </Button>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Segment, Grid, Icon, Button } from "semantic-ui-react";
 import EventDetailMap from "../EventDetailMap";
-import format from "date-fns/format";
+import moment from "moment";
 
 class EventDetailInfo extends React.Component {
   state = {
@@ -13,7 +13,7 @@ class EventDetailInfo extends React.Component {
     }));
   };
   render() {
-    const { event } = this.props;    
+    const { event } = this.props;
     return (
       <Segment.Group>
         <Segment attached="top">
@@ -32,7 +32,7 @@ class EventDetailInfo extends React.Component {
               <Icon name="calendar" size="large" color="teal" />
             </Grid.Column>
             <Grid.Column width={15}>
-              <span>{format(event.date.toDate(), "dddd Do MMMM")}</span>
+              <span>{event.date && moment.unix(event.date.seconds).format("dddd Do MMMM")}</span>
             </Grid.Column>
           </Grid>
         </Segment>

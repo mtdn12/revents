@@ -11,7 +11,7 @@ import LoginModal from '../components/organisms/LoginModal'
 import {clearModal} from '../modules/modals/actions'
 import {requestLogin, requestSocialLogin} from '../modules/auth/actions'
 
-class LoginModalContainer extends Component {  
+class LoginModalContainer extends Component {
   render() {    
     return (
        <LoginModal {...this.props}/>

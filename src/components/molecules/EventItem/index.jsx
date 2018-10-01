@@ -1,10 +1,10 @@
 import React from "react";
-import { Segment, Item, List, Button, Icon } from "semantic-ui-react";
+import { Segment, Item, List, Button, Icon, Label } from "semantic-ui-react";
 import EventListAttendee from "../EventListAttendee";
 import { Link } from "react-router-dom";
 import format from "date-fns/format";
 
-const EventListItem = ({ event, handleSelectEditEvent, handleDeleteEvent }) => {  
+const EventListItem = ({ event, handleSelectEditEvent, handleDeleteEvent }) => {
   return (
     <Segment.Group>
       <Segment>
@@ -14,16 +14,27 @@ const EventListItem = ({ event, handleSelectEditEvent, handleDeleteEvent }) => {
             <Item.Content>
               <Item.Header as="a">{event.title}</Item.Header>
               <Item.Description>{event.hostedBy}</Item.Description>
+              {event.cancelled && (
+                <Label
+                  style={{ top: "-40px" }}
+                  ribbon="right"
+                  color="red"
+                  content="This event has been cancelled"
+                />
+              )}
             </Item.Content>
           </Item>
         </Item.Group>
       </Segment>
       <Segment>
-        <span>
-          <Icon name="clock" />
-          {format(event.date.toDate(), "dddd Do MMMM")} at {format(event.date.toDate(), "HH:mm")}{" "}
-          |<Icon name="marker" /> {event.venue}
-        </span>
+        {event.date && (
+          <span>
+            <Icon name="clock" />
+            {format(event.date.toDate(), "dddd Do MMMM")} at{" "}
+            {format(event.date.toDate(), "HH:mm")} |<Icon name="marker" />{" "}
+            {event.venue}
+          </span>
+        )}
       </Segment>
       <Segment secondary>
         <List horizontal>
@@ -35,20 +46,13 @@ const EventListItem = ({ event, handleSelectEditEvent, handleDeleteEvent }) => {
       </Segment>
       <Segment clearing>
         <span>{event.description}</span>
-        <Button
-          as="a"
-          color="red"
-          floated="right"
-          content="Delete"
-          // onClick={handleDeleteEvent(event.id)}
-        />
+        <Button as="a" color="red" floated="right" content="Delete" />
         <Button
           as={Link}
           to={`/event/${event.id}`}
           color="teal"
           floated="right"
           content="View"
-          // onClick={handleSelectEditEvent(event)}
         />
       </Segment>
     </Segment.Group>

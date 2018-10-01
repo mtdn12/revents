@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Segment, Form, Button, Header } from "semantic-ui-react";
 import Template from "../../templates/Template";
@@ -27,8 +26,15 @@ class EventForm extends React.Component {
   handleSetCityLatLng = cor => {
     this.setState({ cityLatLng: cor });
   };
+  async componentDidMount() {
+    if (this.props.formItem.venueLatLng) {
+      await this.setState({
+        venueLatLng: this.props.formItem.venueLatLng
+      });
+    }
+  }
   render() {
-    const { formItem } = this.props;
+    const { formItem, handleFormAction, handleToggleEvent } = this.props;  
     return (
       <Template>
         <Formik
@@ -42,7 +48,9 @@ class EventForm extends React.Component {
             venue: Yup.string().required("venue field is required"),
             hostedBy: Yup.string().required("hostedBy field is required")
           })}
-          onSubmit={values => console.log(values)}
+          onSubmit={values => {
+            handleFormAction(values);
+          }}
           enableReinitialize
           render={({
             values,
@@ -52,7 +60,8 @@ class EventForm extends React.Component {
             errors,
             touched,
             setFieldValue,
-            setFieldTouched
+            setFieldTouched,
+            dirty
           }) => (
             <Segment>
               <Form onSubmit={handleSubmit}>
@@ -134,9 +143,21 @@ class EventForm extends React.Component {
                   type="text"
                 />
                 <Button positive type="submit">
-                  Submit
+                  {values.id ? "Update" : "Create"}
                 </Button>
                 <Button type="button">Cancel</Button>
+                {values.id && (
+                  <Button
+                    type="button"
+                    floated="right"
+                    color={values.cancelled ? "green" : "red"}
+                    onClick={() =>
+                      handleToggleEvent(!values.cancelled, values.id)
+                    }
+                  >
+                    {values.cancelled ? "Reactivate Event" : "Cancel event"}
+                  </Button>
+                )}
               </Form>
             </Segment>
           )}

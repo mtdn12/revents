@@ -14,9 +14,9 @@ const UPDATE_EVENT_REQUEST = 'event/UPDATE_EVENT_REQUEST'
 const UPDATE_EVENT_SUCCESS = 'event/UPDATE_EVENT_SUCCESS'
 const UPDATE_EVENT_FAILURE = 'event/UPDATE_EVENT_FAILURE'
 // Delete event
-const DELETE_EVENT_REQUEST = 'event/DELETE_EVENT_REQUEST'
-const DELETE_EVENT_SUCCESS = 'event/DELETE_EVENT_SUCCESS'
-const DELETE_EVENT_FAILURE = 'event/DELETE_EVENT_FAILURE'
+const TOGGLE_EVENT_REQUEST = 'event/TOGGLE_EVENT_REQUEST'
+const TOGGLE_EVENT_SUCCESS = 'event/TOGGLE_EVENT_SUCCESS'
+const TOGGLE_EVENT_FAILURE = 'event/TOGGLE_EVENT_FAILURE'
 
 
 export const CONSTANTS = {
@@ -28,9 +28,9 @@ export const CONSTANTS = {
   UPDATE_EVENT_SUCCESS,
   UPDATE_EVENT_FAILURE,
   // delete
-  DELETE_EVENT_REQUEST,
-  DELETE_EVENT_SUCCESS,
-  DELETE_EVENT_FAILURE
+  TOGGLE_EVENT_REQUEST,
+  TOGGLE_EVENT_SUCCESS,
+  TOGGLE_EVENT_FAILURE
 }
 
 /**
@@ -51,9 +51,10 @@ export const CONSTANTS = {
    }
  })
 
- export const requestDeleteEvent = eventId => ({
-   type: DELETE_EVENT_REQUEST,
+ export const requestToggleEvent = (cancelled, eventId) => ({
+   type: TOGGLE_EVENT_REQUEST,
    payload: {
+    cancelled,
     eventId,
    }
  })

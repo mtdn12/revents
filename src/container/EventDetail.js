@@ -5,6 +5,7 @@ import {
   connect
 } from 'react-redux'
 import {firestoreConnect} from 'react-redux-firebase'
+import { withFirestore, withFirebase, actionTypes } from 'react-redux-firebase'
 import {
   compose
 } from 'redux'
@@ -13,16 +14,15 @@ import withSaga from '../utils/withSaga'
 import eventDetailReducer from '../modules/eventDetail/reducer'
 import eventDetailSaga from '../modules/eventDetail/sagas'
 import EventDetail from '../components/pages/EventDetail'
-import {push} from 'react-router-redux'
+import {requestEventDetail} from '../modules/eventDetail/actions'
 import {
   setFormItem
 } from '../modules/eventForm/actions'
 
 class EventDetailContainer extends Component {
-  handleSetManageForm = async item => {
-    await this.props.handleSetFormItem(item)
-    this.props.pushToEditForm(item.id)
-  }
+  async componentDidMount(){
+    this.props.handleGetEventDetail(this.props.match.params.id)
+  } 
   render() {
     return ( <EventDetail { ...this.props } handleSetManageForm={this.handleSetManageForm} /> )
   }
@@ -34,7 +34,7 @@ const mapStateToProps = (state, ownsProps) => ({
 
 const mapDispatchToProps = dispatch => ({
   handleSetFormItem: item => dispatch(setFormItem(item)),
-  pushToEditForm: id => dispatch(push(`/manage/${id}`))
+  handleGetEventDetail: id => dispatch(requestEventDetail(id)), 
 })
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps)
@@ -48,9 +48,9 @@ const withEventDetailSaga = withSaga({
 })
 
 export default compose(
+  withFirestore,
   withEventDetailReducer,
   withEventDetailSaga,
-  withConnect,
-  firestoreConnect([{
-    collection: 'events'
-  }]))(EventDetailContainer)
+  withConnect, 
+  withFirebase,
+  )(EventDetailContainer)
